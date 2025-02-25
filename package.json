@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/simplew4y/SimpleVideo_backend/issues"
   },
-  "homepage": "https://github.com/simplew4y/SimpleVideo_backend#readme"
+  "homepage": "https://github.com/simplew4y/SimpleVideo_backend#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
