@@ -1,0 +1,19 @@
+{
+  "name": "simplevideo_backend",
+  "version": "1.0.0",
+  "description": "simplevideo backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/simplew4y/SimpleVideo_backend.git"
+  },
+  "author": "simpleway",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simplew4y/SimpleVideo_backend/issues"
+  },
+  "homepage": "https://github.com/simplew4y/SimpleVideo_backend#readme"
+}
