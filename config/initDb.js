@@ -1,5 +1,6 @@
 const { sequelize, createConnection } = require('./database');
-const { init } = require('../models/User');
+const { init: initUser } = require('../models/User');
+const { init: initVideo } = require('../models/Video');
 
 async function initializeDatabase() {
   try {
@@ -19,8 +20,9 @@ async function initializeDatabase() {
     // Test connection
     await newSequelize.authenticate();
     
-    // Initialize models with new connection
-    init(newSequelize);
+    // Initialize all models with new connection
+    initUser(newSequelize);
+    initVideo(newSequelize);
     
     // Sync models
     await newSequelize.sync({ alter: true });

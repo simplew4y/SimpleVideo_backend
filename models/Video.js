@@ -1,31 +1,39 @@
-// models/Video.js
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const User = require('./User');
+const { Model, DataTypes } = require('sequelize');
+const { User } = require('./User');
 
-const Video = sequelize.define('Video', {
-  model: {
-    type: DataTypes.STRING, // 'klings' 或 'runway'
-    allowNull: false,
-  },
-  taskType: {
-    type: DataTypes.STRING, // 'text-to-video' 或 'image-to-video'
-    allowNull: false,
-  },
-  inputData: {
-    type: DataTypes.TEXT, // 用户输入的文本或图片URL
-    allowNull: false,
-  },
-  videoUrl: {
-    type: DataTypes.STRING, // 生成的视频链接
-  },
-  status: {
-    type: DataTypes.STRING, // 'pending', 'completed', 'failed'
-    defaultValue: 'pending',
-  },
-});
+class Video extends Model {}
 
-Video.belongsTo(User); // 视频任务属于某个用户
-User.hasMany(Video);
+const init = (sequelizeInstance) => {
+  Video.init({
+    model: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    taskType: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    inputData: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    videoUrl: {
+      type: DataTypes.STRING,
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'pending',
+    },
+  }, {
+    sequelize: sequelizeInstance,
+    modelName: 'Video'
+  });
 
-module.exports = Video;
+  // Set up associations
+  Video.belongsTo(User);
+  User.hasMany(Video);
+
+  return Video;
+};
+
+module.exports = { Video, init };
