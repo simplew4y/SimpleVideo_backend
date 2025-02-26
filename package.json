@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/simplew4y/SimpleVideo_backend#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "axios": "^1.8.1",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.3",
+    "sequelize": "^6.37.5"
   }
 }
