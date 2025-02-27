@@ -1,6 +1,6 @@
 // controllers/videoController.js
 const Video = require('../models/Video');
-const klingsService = require('../services/klingsService');
+const klingsService = require('../services/klingService');
 const runwayService = require('../services/runwayService');
 
 const createVideo = async (req, res) => {
