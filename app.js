@@ -5,8 +5,17 @@ const authRoutes = require('./routes/authRoutes');
 const videoRoutes = require('./routes/videoRoutes');
 const helloRoutes = require('./routes/helloRoutes');
 const initializeDatabase = require('./config/initDb');
+const fileUpload = require('express-fileupload');
 
+// 重要：这些中间件的顺序很重要
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 }, // 限制文件大小为 50MB
+  createParentPath: true,
+  debug: true  // 添加调试模式
+}));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/videos', videoRoutes);
 app.use('/hello', helloRoutes);  // 添加新的路由
