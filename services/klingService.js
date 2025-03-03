@@ -595,26 +595,18 @@ class KlingService {
   static async generateVideo16_10s(prompt, options = {}) {
     try {
       // 打印请求参数
-      console.log('1.6 版本 10s 图生视频请求参数:', {
+      console.log('1.6 版本 10s 文生视频请求参数:', {
+        prompt,
         ...options,
-        inputImageSize: inputImage.length,
-        endpoint: KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_10S
+        endpoint: KLING_ENDPOINTS.TEXT_TO_VIDEO_16_10S
       });
 
       // 构建请求数据
       const formData = new FormData();
-      formData.append('input_image', inputImage);
-      
-      // 添加其他参数
-      formData.append('prompt', options.prompt || '');
+      formData.append('prompt', prompt);
       formData.append('negative_prompt', options.negative_prompt || '');
       formData.append('cfg', options.cfg || '0.5');
       formData.append('aspect_ratio', options.aspect_ratio || '1:1');
-      
-      // 添加 image_list 参数（如果有）
-      if (options.image_list) {
-        formData.append('image_list', options.image_list);
-      }
       
       // 添加其他可能的参数
       if (options.additionalParams) {
@@ -626,12 +618,12 @@ class KlingService {
       }
 
       // 打印完整请求信息
-      console.log('1.6 版本 10s 图生视频请求头:', {
+      console.log('1.6 版本 10s 文生视频请求头:', {
         'Content-Type': formData.getHeaders()['content-type']
       });
 
       const response = await axios.post(
-        `${KLING_BASE_URL}${KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_10S}`,
+        `${KLING_BASE_URL}${KLING_ENDPOINTS.TEXT_TO_VIDEO_16_10S}`,
         formData,
         {
           headers: {
@@ -644,43 +636,35 @@ class KlingService {
       return response.data;
     } catch (error) {
       // 打印详细错误信息
-      console.error('Kling 1.6 版本 10s 图生视频 API 错误详情:', {
+      console.error('Kling 1.6 版本 10s 文生视频 API 错误详情:', {
         message: error.message,
         response: error.response?.data,
         status: error.response?.status,
         headers: error.response?.headers
       });
       
-      throw new Error(`1.6 版本 10s 图生视频失败: ${error.message}`);
+      throw new Error(`1.6 版本 10s 文生视频失败: ${error.message}`);
     }
   }
 
   /**
    * 生成 1.6 版本高清 5s 视频
    */
-  static async generateVideoFromImage16_HQ_5s(inputImage, options = {}) {
+  static async generateVideo16_HQ_5s(prompt, options = {}) {
     try {
       // 打印请求参数
-      console.log('1.6 版本高清 5s 图生视频请求参数:', {
+      console.log('1.6 版本高清 5s 文生视频请求参数:', {
+        prompt,
         ...options,
-        inputImageSize: inputImage.length,
-        endpoint: KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_HQ_5S
+        endpoint: KLING_ENDPOINTS.TEXT_TO_VIDEO_16_HQ_5S
       });
 
       // 构建请求数据
       const formData = new FormData();
-      formData.append('input_image', inputImage);
-      
-      // 添加其他参数
-      formData.append('prompt', options.prompt || '');
+      formData.append('prompt', prompt);
       formData.append('negative_prompt', options.negative_prompt || '');
       formData.append('cfg', options.cfg || '0.5');
       formData.append('aspect_ratio', options.aspect_ratio || '1:1');
-      
-      // 添加 image_list 参数（如果有）
-      if (options.image_list) {
-        formData.append('image_list', options.image_list);
-      }
       
       // 添加其他可能的参数
       if (options.additionalParams) {
@@ -692,12 +676,12 @@ class KlingService {
       }
 
       // 打印完整请求信息
-      console.log('1.6 版本高清 5s 图生视频请求头:', {
+      console.log('1.6 版本高清 5s 文生视频请求头:', {
         'Content-Type': formData.getHeaders()['content-type']
       });
 
       const response = await axios.post(
-        `${KLING_BASE_URL}${KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_HQ_5S}`,
+        `${KLING_BASE_URL}${KLING_ENDPOINTS.TEXT_TO_VIDEO_16_HQ_5S}`,
         formData,
         {
           headers: {
@@ -710,43 +694,35 @@ class KlingService {
       return response.data;
     } catch (error) {
       // 打印详细错误信息
-      console.error('Kling 1.6 版本高清 5s 图生视频 API 错误详情:', {
+      console.error('Kling 1.6 版本高清 5s 文生视频 API 错误详情:', {
         message: error.message,
         response: error.response?.data,
         status: error.response?.status,
         headers: error.response?.headers
       });
       
-      throw new Error(`1.6 版本高清 5s 图生视频失败: ${error.message}`);
+      throw new Error(`1.6 版本高清 5s 文生视频失败: ${error.message}`);
     }
   }
 
   /**
    * 生成 1.6 版本高清 10s 视频
    */
-  static async generateVideoFromImage16_HQ_10s(inputImage, options = {}) {
+  static async generateVideo16_HQ_10s(prompt, options = {}) {
     try {
       // 打印请求参数
-      console.log('1.6 版本高清 10s 图生视频请求参数:', {
+      console.log('1.6 版本高清 10s 文生视频请求参数:', {
+        prompt,
         ...options,
-        inputImageSize: inputImage.length,
-        endpoint: KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_HQ_10S
+        endpoint: KLING_ENDPOINTS.TEXT_TO_VIDEO_16_HQ_10S
       });
 
       // 构建请求数据
       const formData = new FormData();
-      formData.append('input_image', inputImage);
-      
-      // 添加其他参数
-      formData.append('prompt', options.prompt || '');
+      formData.append('prompt', prompt);
       formData.append('negative_prompt', options.negative_prompt || '');
       formData.append('cfg', options.cfg || '0.5');
       formData.append('aspect_ratio', options.aspect_ratio || '1:1');
-      
-      // 添加 image_list 参数（如果有）
-      if (options.image_list) {
-        formData.append('image_list', options.image_list);
-      }
       
       // 添加其他可能的参数
       if (options.additionalParams) {
@@ -758,12 +734,12 @@ class KlingService {
       }
 
       // 打印完整请求信息
-      console.log('1.6 版本高清 10s 图生视频请求头:', {
+      console.log('1.6 版本高清 10s 文生视频请求头:', {
         'Content-Type': formData.getHeaders()['content-type']
       });
 
       const response = await axios.post(
-        `${KLING_BASE_URL}${KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_HQ_10S}`,
+        `${KLING_BASE_URL}${KLING_ENDPOINTS.TEXT_TO_VIDEO_16_HQ_10S}`,
         formData,
         {
           headers: {
@@ -776,14 +752,14 @@ class KlingService {
       return response.data;
     } catch (error) {
       // 打印详细错误信息
-      console.error('Kling 1.6 版本高清 10s 图生视频 API 错误详情:', {
+      console.error('Kling 1.6 版本高清 10s 文生视频 API 错误详情:', {
         message: error.message,
         response: error.response?.data,
         status: error.response?.status,
         headers: error.response?.headers
       });
       
-      throw new Error(`1.6 版本高清 10s 图生视频失败: ${error.message}`);
+      throw new Error(`1.6 版本高清 10s 文生视频失败: ${error.message}`);
     }
   }
 
@@ -851,6 +827,73 @@ class KlingService {
       });
       
       throw new Error(`1.6 版本 5s 图生视频失败: ${error.message}`);
+    }
+  }
+
+  /**
+   * 从图片生成 1.6 版本 10s 视频
+   * 注意：1.6 版本可能不需要 tail_image 参数，但有 image_list 参数
+   */
+  static async generateVideoFromImage16_10s(inputImage, options = {}) {
+    try {
+      // 打印请求参数
+      console.log('1.6 版本 10s 图生视频请求参数:', {
+        ...options,
+        inputImageSize: inputImage.length,
+        endpoint: KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_10S
+      });
+
+      // 构建请求数据
+      const formData = new FormData();
+      formData.append('input_image', inputImage);
+      
+      // 添加其他参数
+      formData.append('prompt', options.prompt || '');
+      formData.append('negative_prompt', options.negative_prompt || '');
+      formData.append('cfg', options.cfg || '0.5');
+      formData.append('aspect_ratio', options.aspect_ratio || '1:1');
+      
+      // 添加 image_list 参数（如果有）
+      if (options.image_list) {
+        formData.append('image_list', options.image_list);
+      }
+      
+      // 添加其他可能的参数
+      if (options.additionalParams) {
+        Object.entries(options.additionalParams).forEach(([key, value]) => {
+          if (value !== undefined && value !== null) {
+            formData.append(key, value);
+          }
+        });
+      }
+
+      // 打印完整请求信息
+      console.log('1.6 版本 10s 图生视频请求头:', {
+        'Content-Type': formData.getHeaders()['content-type']
+      });
+
+      const response = await axios.post(
+        `${KLING_BASE_URL}${KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_10S}`,
+        formData,
+        {
+          headers: {
+            ...formData.getHeaders(),
+            'Authorization': `Bearer ${process.env.KLING_API_KEY}`
+          }
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      // 打印详细错误信息
+      console.error('Kling 1.6 版本 10s 图生视频 API 错误详情:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        headers: error.response?.headers
+      });
+      
+      throw new Error(`1.6 版本 10s 图生视频失败: ${error.message}`);
     }
   }
 
@@ -980,6 +1023,138 @@ class KlingService {
       });
       
       throw new Error(`视频扩展失败: ${error.message}`);
+    }
+  }
+
+  /**
+   * 生成 1.6 版本高清 5s 图到视频
+   */
+  static async generateVideoFromImage16_HQ_5s(inputImage, options = {}) {
+    try {
+      // 打印请求参数
+      console.log('1.6 版本高清 5s 图生视频请求参数:', {
+        ...options,
+        inputImageSize: inputImage.length,
+        endpoint: KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_HQ_5S
+      });
+
+      // 构建请求数据
+      const formData = new FormData();
+      formData.append('input_image', inputImage);
+      
+      // 添加其他参数
+      formData.append('prompt', options.prompt || '');
+      formData.append('negative_prompt', options.negative_prompt || '');
+      formData.append('cfg', options.cfg || '0.5');
+      formData.append('aspect_ratio', options.aspect_ratio || '1:1');
+      
+      // 添加 image_list 参数（如果有）
+      if (options.image_list) {
+        formData.append('image_list', options.image_list);
+      }
+      
+      // 添加其他可能的参数
+      if (options.additionalParams) {
+        Object.entries(options.additionalParams).forEach(([key, value]) => {
+          if (value !== undefined && value !== null) {
+            formData.append(key, value);
+          }
+        });
+      }
+
+      // 打印完整请求信息
+      console.log('1.6 版本高清 5s 图生视频请求头:', {
+        'Content-Type': formData.getHeaders()['content-type']
+      });
+
+      const response = await axios.post(
+        `${KLING_BASE_URL}${KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_HQ_5S}`,
+        formData,
+        {
+          headers: {
+            ...formData.getHeaders(),
+            'Authorization': `Bearer ${process.env.KLING_API_KEY}`
+          }
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      // 打印详细错误信息
+      console.error('Kling 1.6 版本高清 5s 图生视频 API 错误详情:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        headers: error.response?.headers
+      });
+      
+      throw new Error(`1.6 版本高清 5s 图生视频失败: ${error.message}`);
+    }
+  }
+
+  /**
+   * 生成 1.6 版本高清 10s 图到视频
+   */
+  static async generateVideoFromImage16_HQ_10s(inputImage, options = {}) {
+    try {
+      // 打印请求参数
+      console.log('1.6 版本高清 10s 图生视频请求参数:', {
+        ...options,
+        inputImageSize: inputImage.length,
+        endpoint: KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_HQ_10S
+      });
+
+      // 构建请求数据
+      const formData = new FormData();
+      formData.append('input_image', inputImage);
+      
+      // 添加其他参数
+      formData.append('prompt', options.prompt || '');
+      formData.append('negative_prompt', options.negative_prompt || '');
+      formData.append('cfg', options.cfg || '0.5');
+      formData.append('aspect_ratio', options.aspect_ratio || '1:1');
+      
+      // 添加 image_list 参数（如果有）
+      if (options.image_list) {
+        formData.append('image_list', options.image_list);
+      }
+      
+      // 添加其他可能的参数
+      if (options.additionalParams) {
+        Object.entries(options.additionalParams).forEach(([key, value]) => {
+          if (value !== undefined && value !== null) {
+            formData.append(key, value);
+          }
+        });
+      }
+
+      // 打印完整请求信息
+      console.log('1.6 版本高清 10s 图生视频请求头:', {
+        'Content-Type': formData.getHeaders()['content-type']
+      });
+
+      const response = await axios.post(
+        `${KLING_BASE_URL}${KLING_ENDPOINTS.IMAGE_TO_VIDEO_16_HQ_10S}`,
+        formData,
+        {
+          headers: {
+            ...formData.getHeaders(),
+            'Authorization': `Bearer ${process.env.KLING_API_KEY}`
+          }
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      // 打印详细错误信息
+      console.error('Kling 1.6 版本高清 10s 图生视频 API 错误详情:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        headers: error.response?.headers
+      });
+      
+      throw new Error(`1.6 版本高清 10s 图生视频失败: ${error.message}`);
     }
   }
 }
