@@ -6,6 +6,14 @@ const videoRoutes = require('./routes/videoRoutes');
 const helloRoutes = require('./routes/helloRoutes');
 const initializeDatabase = require('./config/initDb');
 const fileUpload = require('express-fileupload');
+const cors = require('cors');
+
+// 配置CORS中间件
+app.use(cors({
+  origin: '*', // 允许所有域名的请求，在生产环境中应该设置为特定域名
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // 重要：这些中间件的顺序很重要
 app.use(express.json());
