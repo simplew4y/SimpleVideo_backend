@@ -2,8 +2,9 @@
 const express = require('express');
 const app = express();
 const authRoutes = require('./routes/authRoutes');
-const videoRoutes = require('./routes/videoRoutes');
+const threeTwoRoutes = require('./routes/threeTwoRoutes');
 const helloRoutes = require('./routes/helloRoutes');
+const deerRoutes = require('./routes/deerRoutes');  // 添加新的路由
 const initializeDatabase = require('./config/initDb');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
@@ -25,8 +26,9 @@ app.use(fileUpload({
 }));
 
 app.use('/api/auth', authRoutes);
-app.use('/api/videos', videoRoutes);
+app.use('/api/302', threeTwoRoutes);  // 更新路由路径
 app.use('/hello', helloRoutes);  // 添加新的路由
+app.use('/api/deer', deerRoutes);  // 添加新的路由路径
 
 // Initialize database before starting the server
 const startServer = async () => {
