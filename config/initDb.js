@@ -9,30 +9,17 @@ const { init: initOAuthConnection } = require('../models/OAuthConnection');
 
 async function initializeDatabase() {
   try {
-    // Create database
-    await sequelize.query('CREATE DATABASE simplevideo').catch(err => {
-      if (err.parent.code !== '42P04') {
-        throw err;
-      }
-    });
-
-    // Close postgres connection
-    await sequelize.close();
-
-    // Create new connection to simplevideo database
-    const newSequelize = createConnection('simplevideo');
+      // Test connection
+    await sequelize.authenticate();
     
-    // Test connection
-    await newSequelize.authenticate();
-    
-    // Initialize all models with new connection
-    const User = initUser(newSequelize);
-    const VideoGenerationTaskDefinition = initVideoGenerationTaskDefinition(newSequelize);
-    const VideoGenerationTaskStatus = initVideoGenerationTaskStatus(newSequelize);
-    const UserSubscription = initUserSubscription(newSequelize);
-    const UserCredit = initUserCredit(newSequelize);
-    const UserFavorite = initUserFavorite(newSequelize);
-    const OAuthConnection = initOAuthConnection(newSequelize);
+    // Initialize all models with the connection
+    const User = initUser(sequelize);
+    const VideoGenerationTaskDefinition = initVideoGenerationTaskDefinition(sequelize);
+    const VideoGenerationTaskStatus = initVideoGenerationTaskStatus(sequelize);
+    const UserSubscription = initUserSubscription(sequelize);
+    const UserCredit = initUserCredit(sequelize);
+    const UserFavorite = initUserFavorite(sequelize);
+    const OAuthConnection = initOAuthConnection(sequelize);
     
     // 设置模型之间的关联关系
     // User与VideoGenerationTaskDefinition的关联
@@ -64,10 +51,10 @@ async function initializeDatabase() {
     OAuthConnection.belongsTo(User, { foreignKey: 'user_id' });
     
     // Sync models
-    await newSequelize.sync({ alter: true });
+    await sequelize.sync({ alter: true });
     
     console.log('Database initialized successfully');
-    return newSequelize;
+    return sequelize;
   } catch (error) {
     console.error('Database initialization failed:', error);
     throw error;

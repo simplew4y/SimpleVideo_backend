@@ -21,16 +21,38 @@ const init = (sequelizeInstance) => {
     },
     password: {
       type: DataTypes.STRING(255),
-      allowNull: true // 可以为NULL，因为谷歌登录的用户可能没有密码
+      allowNull: true
     },
     google_id: {
       type: DataTypes.STRING(100),
       unique: true,
       allowNull: true
     },
-    profile_image: {
+    given_name: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    family_name: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    picture: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    role: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      defaultValue: 'user'
+    },
+    preferences: {
+      type: DataTypes.JSONB,
+      allowNull: false,
+      defaultValue: {
+        theme: 'light',
+        notifications: true,
+        language: 'en'
+      }
     },
     created_at: {
       type: DataTypes.DATE,
@@ -51,6 +73,6 @@ const init = (sequelizeInstance) => {
 };
 
 module.exports = { 
-  User: () => User, // 返回函数以确保在初始化后访问
+  User: () => User,
   init 
 };

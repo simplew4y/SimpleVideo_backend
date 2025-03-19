@@ -9,11 +9,15 @@ const initializeDatabase = require('./config/initDb');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 
-// 配置CORS中间件
+// 配置 CORS 中间件
 app.use(cors({
-  origin: '*', // 允许所有域名的请求，在生产环境中应该设置为特定域名
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://your-production-domain.com'  // 生产环境域名
+    : 'http://localhost:5173',              // 开发环境域名
+  credentials: true,                        // 允许携带凭证（cookies）
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range']
 }));
 
 // 重要：这些中间件的顺序很重要
@@ -26,8 +30,8 @@ app.use(fileUpload({
 }));
 
 app.use('/api/auth', authRoutes);
-app.use('/api/302', threeTwoRoutes);  // 更新路由路径
-app.use('/hello', helloRoutes);  // 添加新的路由
+app.use('/api/32', threeTwoRoutes);  // 更新路由路径
+app.use('/api/hello', helloRoutes);  // 添加新的路由
 app.use('/api/deer', deerRoutes);  // 添加新的路由路径
 
 // Initialize database before starting the server
@@ -47,5 +51,14 @@ const startServer = async () => {
 if (require.main === module) {
   startServer();
 }
+
+// 错误处理中间件
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ 
+    message: '服务器内部错误',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
 
 module.exports = app;
